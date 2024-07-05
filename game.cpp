@@ -14,20 +14,21 @@ game::game()
 
 	do
 	{
-		cout << "âû õîòèòå õîäèòü ïåðâûì? (äà/íåò) ";
+		cout << "Ã¢Ã» ÃµÃ®Ã²Ã¨Ã²Ã¥ ÃµÃ®Ã¤Ã¨Ã²Ã¼ Ã¯Ã¥Ã°Ã¢Ã»Ã¬? (Ã¤Ã /Ã­Ã¥Ã²) ";
 		cin >> moveFirst;
 		cout << '\n';
 		for (int i = 0; i < moveFirst.length(); i++)
 		{
 			moveFirst[i] = tolower(moveFirst[i]);
 		}
-	} while ((moveFirst != "äà") && (moveFirst != "íåò"));
+	} while ((moveFirst != "Ã¤Ã ") && (moveFirst != "Ã­Ã¥Ã²"));
 
-	if (moveFirst == "äà")
+	if (moveFirst == "Ã¤Ã ")
 	{
 		playerChar = 'X';
 		pcChar = 'O';
 		moveNow = 1;
+		cout << "Ð²Ð°Ñˆ Ð·Ð½Ð°Ðº: X\n";
 	}
 	else
 	{
@@ -52,7 +53,7 @@ void game::movePlayer()
 
 	do
 	{
-		cout << "íà êàêóþ êëåòêó âû õîòèòå ïîñòàâèòü çíàê? (1-9) ";
+		cout << "Ð½Ð° ÐºÐ°ÐºÑƒÑŽ ÐºÐ»ÐµÑ‚ÐºÑƒ Ð²Ñ‹ Ñ…Ð¾Ñ‚Ð¸Ñ‚Ðµ Ð¿Ð¾ÑÑ‚Ð°Ð²Ð¸Ñ‚ÑŒ " <<'\'' << playerChar << '\'' << "? (1-9) ";
 		cin >> space;
 		cout << '\n';
 	} while (islegal(space));
@@ -74,7 +75,7 @@ void game::movePC()
 		}
 	}
 
-	cout << "êîìïüþòåð ïîñòàâèë çíàê íà êëåòêó íîìåð: " << PCmove[i] + 1 << "\n\n";
+	cout << "ÃªÃ®Ã¬Ã¯Ã¼Ã¾Ã²Ã¥Ã° Ã¯Ã®Ã±Ã²Ã Ã¢Ã¨Ã« Ã§Ã­Ã Ãª Ã­Ã  ÃªÃ«Ã¥Ã²ÃªÃ³ Ã­Ã®Ã¬Ã¥Ã°: " << PCmove[i] + 1 << "\n\n";
 
 	moveNow = true;
 }
@@ -88,13 +89,13 @@ void game::victoryDraw()
 		if ((field[winPos[i][0]] == playerChar) && (field[winPos[i][1]] == playerChar) && (field[winPos[i][2]] == playerChar))
 		{
 			gameField();
-			cout << "âû âûéãðàëè" << endl;
+			cout << "Ã¢Ã» Ã¢Ã»Ã©Ã£Ã°Ã Ã«Ã¨" << endl;
 			system("pause");
 			exit(1); //win player
 		}
 		else if ((field[winPos[i][0]] == pcChar) && (field[winPos[i][1]] == pcChar) && (field[winPos[i][2]] == pcChar))
 		{
-			cout << "âûéãðàë êîìïüþòåð" << endl;
+			cout << "Ã¢Ã»Ã©Ã£Ã°Ã Ã« ÃªÃ®Ã¬Ã¯Ã¼Ã¾Ã²Ã¥Ã°" << endl;
 			system("pause");
 			exit(0); //win PC
 		}
@@ -107,7 +108,7 @@ void game::victoryDraw()
 			return; //continue game
 		}
 	}
-	cout << "íè÷üÿ" << endl;
+	cout << "Ã­Ã¨Ã·Ã¼Ã¿" << endl;
 	system("pause");
 	exit(2); //Draw
 }
