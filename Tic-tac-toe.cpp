@@ -1,6 +1,6 @@
-﻿#include <iostream>
-#include <Windows.h>
 #include "game.h"
+#include <iostream>
+#include <Windows.h>
 
 using namespace std;
 
@@ -15,22 +15,22 @@ int main()
 	{
 		switch (play.moveNow)
 		{
-			case(1):
-				play.movePlayer();
+		case(1):
+			play.movePlayer();
 
-				system("cls");
+			system("cls");
 
-				break;
-			case(0):
-				system("cls");
+			break;
+		case(0):
+			system("cls");
 
-				play.movePC();
-				play.gameField();
+			play.movePC();
+			play.gameField();
 
-				break;
+			break;
 		}
 		play.victoryDraw();
 	}
-	
+
 	return 0;
 }
