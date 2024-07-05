@@ -9,7 +9,7 @@ game::game()
 	cout << '\t' << '4' << " | " << '5' << " | " << '6' << '\n';
 	cout << '\t' << "----------" << '\n';
 	cout << '\t' << '7' << " | " << '8' << " | " << '9' << '\n' << '\n';
-	
+
 	string moveFirst;
 
 	do
@@ -53,7 +53,7 @@ void game::movePlayer()
 
 	do
 	{
-		cout << "на какую клетку вы хотите поставить " <<'\'' << playerChar << '\'' << "? (1-9) ";
+		cout << "на какую клетку вы хотите поставить " << '\'' << playerChar << '\'' << "? (1-9) ";
 		cin >> space;
 		cout << '\n';
 	} while (islegal(space));
@@ -64,7 +64,7 @@ void game::movePlayer()
 }
 
 void game::movePC()
-{	
+{
 	int i = 0;
 	for (; i < 9; i++)
 	{
@@ -100,7 +100,7 @@ void game::victoryDraw()
 			exit(0); //win PC
 		}
 	}
-	
+
 	for (int i = 0; i < 9; i++)
 	{
 		if (field[i] == ' ')
