@@ -14,16 +14,16 @@ game::game()
 
 	do
 	{
-		cout << "âû õîòèòå õîäèòü ïåðâûì? (äà/íåò) ";
+		cout << "вы хотите ходить первым? (да/нет) ";
 		cin >> moveFirst;
 		cout << '\n';
 		for (int i = 0; i < moveFirst.length(); i++)
 		{
 			moveFirst[i] = tolower(moveFirst[i]);
 		}
-	} while ((moveFirst != "äà") && (moveFirst != "íåò"));
+	} while ((moveFirst != "да") && (moveFirst != "нет"));
 
-	if (moveFirst == "äà")
+	if (moveFirst == "да")
 	{
 		playerChar = 'X';
 		pcChar = 'O';
@@ -75,7 +75,7 @@ void game::movePC()
 		}
 	}
 
-	cout << "êîìïüþòåð ïîñòàâèë çíàê íà êëåòêó íîìåð: " << PCmove[i] + 1 << "\n\n";
+	cout << "компьютер поставил знак на клетку номер: " << PCmove[i] + 1 << "\n\n";
 
 	moveNow = true;
 }
@@ -89,13 +89,13 @@ void game::victoryDraw()
 		if ((field[winPos[i][0]] == playerChar) && (field[winPos[i][1]] == playerChar) && (field[winPos[i][2]] == playerChar))
 		{
 			gameField();
-			cout << "âû âûéãðàëè" << endl;
+			cout << "вы выйграли" << endl;
 			system("pause");
 			exit(1); //win player
 		}
 		else if ((field[winPos[i][0]] == pcChar) && (field[winPos[i][1]] == pcChar) && (field[winPos[i][2]] == pcChar))
 		{
-			cout << "âûéãðàë êîìïüþòåð" << endl;
+			cout << "выйграл компьютер" << endl;
 			system("pause");
 			exit(0); //win PC
 		}
@@ -108,7 +108,7 @@ void game::victoryDraw()
 			return; //continue game
 		}
 	}
-	cout << "íè÷üÿ" << endl;
+	cout << "ничья" << endl;
 	system("pause");
 	exit(2); //Draw
 }
