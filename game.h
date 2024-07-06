@@ -8,8 +8,6 @@ using namespace std;
 class game
 {
 public:
-	bool moveNow;
-
 	game();
 	void gameField();
 	void movePlayer();
@@ -18,8 +16,10 @@ public:
 	bool islegal(int space);
 
 private:
+        const int PCmove[9] = { 4, 0, 2, 6, 8, 7, 1, 5, 3 };
+        char field[9];
 	char playerChar;
 	char pcChar;
-	char field[9];
-	const int PCmove[9] = { 4, 0, 2, 6, 8, 7, 1, 5, 3 };
+public: 
+        bool moveNow;
 };
