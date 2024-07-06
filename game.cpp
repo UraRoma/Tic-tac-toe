@@ -17,7 +17,7 @@ game::game()
 		cout << "вы хотите ходить первым? (да/нет) ";
 		cin >> moveFirst;
 		cout << '\n';
-		for (int i = 0; i < moveFirst.length(); i++)
+		for (int i = 0; i < moveFirst.length(); ++i)
 		{
 			moveFirst[i] = tolower(moveFirst[i]);
 		}
@@ -84,7 +84,7 @@ void game::victoryDraw()
 {
 	int winPos[8][3] = { {6,7,8}, { 3, 4, 5 }, { 0,1,2 }, { 6,3,0 }, { 7,4,1 }, { 8,5,2 }, { 6,4,2 }, { 0,4,8 } };
 
-	for (int i = 0; i < 8; i++)
+	for (int i = 0; i < 8; ++i)
 	{
 		if ((field[winPos[i][0]] == playerChar) && (field[winPos[i][1]] == playerChar) && (field[winPos[i][2]] == playerChar))
 		{
@@ -101,7 +101,7 @@ void game::victoryDraw()
 		}
 	}
 
-	for (int i = 0; i < 9; i++)
+	for (int i = 0; i < 9; ++i)
 	{
 		if (field[i] == ' ')
 		{
