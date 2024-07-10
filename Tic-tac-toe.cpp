@@ -1,4 +1,4 @@
-#include "game.h"
+﻿#include "game.h"
 #include <iostream>
 #include <Windows.h>
 
@@ -13,7 +13,7 @@ int main()
 	game play;
 	while (true)
 	{
-		switch (play.moveNow)
+		switch (play.GetMoveNow())
 		{
 		case(1):
 			play.movePlayer();

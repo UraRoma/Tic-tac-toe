@@ -14,21 +14,21 @@ game::game()
 
 	do
 	{
-		cout << "Ð²Ñ‹ Ñ…Ð¾Ñ‚Ð¸Ñ‚Ðµ Ñ…Ð¾Ð´Ð¸Ñ‚ÑŒ Ð¿ÐµÑ€Ð²Ñ‹Ð¼? (Ð´Ð°/Ð½ÐµÑ‚) ";
+		cout << "âû õîòèòå õîäèòü ïåðâûì? (äà/íåò) ";
 		cin >> moveFirst;
 		cout << '\n';
 		for (int i = 0; i < moveFirst.length(); ++i)
 		{
 			moveFirst[i] = tolower(moveFirst[i]);
 		}
-	} while ((moveFirst != "Ð´Ð°") && (moveFirst != "Ð½ÐµÑ‚"));
+	} while ((moveFirst != "äà") && (moveFirst != "íåò"));
 
-	if (moveFirst == "Ð´Ð°")
+	if (moveFirst == "äà")
 	{
 		playerChar = 'X';
 		pcChar = 'O';
 		moveNow = 1;
-		cout << "Ð²Ð°Ñˆ Ð·Ð½Ð°Ðº: X\n";
+		cout << "âàø çíàê: X\n";
 	}
 	else
 	{
@@ -53,7 +53,7 @@ void game::movePlayer()
 
 	do
 	{
-		cout << "Ð½Ð° ÐºÐ°ÐºÑƒÑŽ ÐºÐ»ÐµÑ‚ÐºÑƒ Ð²Ñ‹ Ñ…Ð¾Ñ‚Ð¸Ñ‚Ðµ Ð¿Ð¾ÑÑ‚Ð°Ð²Ð¸Ñ‚ÑŒ " << '\'' << playerChar << '\'' << "? (1-9) ";
+		cout << "íà êàêóþ êëåòêó âû õîòèòå ïîñòàâèòü " << '\'' << playerChar << '\'' << "? (1-9) ";
 		cin >> space;
 		cout << '\n';
 	} while (islegal(space));
@@ -66,7 +66,7 @@ void game::movePlayer()
 void game::movePC()
 {
 	int i = 0;
-	for (; i < 9; i++)
+	for (; i < 9; ++i)
 	{
 		if ((field[PCmove[i]] != playerChar) && (field[PCmove[i]] != pcChar))
 		{
@@ -75,7 +75,7 @@ void game::movePC()
 		}
 	}
 
-	cout << "ÐºÐ¾Ð¼Ð¿ÑŒÑŽÑ‚ÐµÑ€ Ð¿Ð¾ÑÑ‚Ð°Ð²Ð¸Ð» Ð·Ð½Ð°Ðº Ð½Ð° ÐºÐ»ÐµÑ‚ÐºÑƒ Ð½Ð¾Ð¼ÐµÑ€: " << PCmove[i] + 1 << "\n\n";
+	cout << "êîìïüþòåð ïîñòàâèë çíàê íà êëåòêó íîìåð: " << PCmove[i] + 1 << "\n\n";
 
 	moveNow = true;
 }
@@ -84,31 +84,33 @@ void game::victoryDraw()
 {
 	int winPos[8][3] = { {6,7,8}, { 3, 4, 5 }, { 0,1,2 }, { 6,3,0 }, { 7,4,1 }, { 8,5,2 }, { 6,4,2 }, { 0,4,8 } };
 
-	for (int i = 0; i < 8; ++i)
+	int i = 0;
+
+	for (; i < 8; ++i)
 	{
 		if ((field[winPos[i][0]] == playerChar) && (field[winPos[i][1]] == playerChar) && (field[winPos[i][2]] == playerChar))
 		{
 			gameField();
-			cout << "Ð²Ñ‹ Ð²Ñ‹Ð¹Ð³Ñ€Ð°Ð»Ð¸" << endl;
+			cout << "âû âûéãðàëè" << endl;
 			system("pause");
 			exit(1); //win player
 		}
 		else if ((field[winPos[i][0]] == pcChar) && (field[winPos[i][1]] == pcChar) && (field[winPos[i][2]] == pcChar))
 		{
-			cout << "Ð²Ñ‹Ð¹Ð³Ñ€Ð°Ð» ÐºÐ¾Ð¼Ð¿ÑŒÑŽÑ‚ÐµÑ€" << endl;
+			cout << "âûéãðàë êîìïüþòåð" << endl;
 			system("pause");
 			exit(0); //win PC
 		}
 	}
 
-	for (int i = 0; i < 9; ++i)
+	for (i = 0; i < 9; ++i)
 	{
 		if (field[i] == ' ')
 		{
 			return; //continue game
 		}
 	}
-	cout << "Ð½Ð¸Ñ‡ÑŒÑ" << endl;
+	cout << "íè÷üÿ" << endl;
 	system("pause");
 	exit(2); //Draw
 }
@@ -123,4 +125,9 @@ bool game::islegal(int space)
 		}
 	}
 	return true;
+}
+
+bool game::GetMoveNow()
+{
+	return moveNow;
 }
