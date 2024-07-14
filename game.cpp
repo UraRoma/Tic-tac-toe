@@ -14,21 +14,21 @@ game::game()
 
 	do
 	{
-		cout << "�� ������ ������ ������? (��/���) ";
+		cout << "вы хотите ходить первым? (да/нет) ";
 		cin >> moveFirst;
 		cout << '\n';
 		for (int i = 0; i < moveFirst.length(); ++i)
 		{
 			moveFirst[i] = tolower(moveFirst[i]);
 		}
-	} while ((moveFirst != "��") && (moveFirst != "���"));
+	} while ((moveFirst != "да") && (moveFirst != "нет"));
 
-	if (moveFirst == "��")
+	if (moveFirst == "да")
 	{
 		playerChar = 'X';
 		pcChar = 'O';
 		moveNow = 1;
-		cout << "��� ����: X\n";
+		cout << "ваш знак: X\n";
 	}
 	else
 	{
@@ -53,7 +53,7 @@ void game::movePlayer()
 
 	do
 	{
-		cout << "�� ����� ������ �� ������ ��������� " << '\'' << playerChar << '\'' << "? (1-9) ";
+		cout << "на какую клетку вы хотите поставить " << '\'' << playerChar << '\'' << "? (1-9) ";
 		cin >> space;
 		cout << '\n';
 	} while (islegal(space));
@@ -66,24 +66,122 @@ void game::movePlayer()
 void game::movePC()
 {
 	int i = 0;
+	int count;
+
+	for (; i < 8; ++i)
+	{
+		count = 0;
+
+		if ((field[winPos[i][0]] == pcChar))
+		{
+			++count;
+		}
+		if ((field[winPos[i][1]] == pcChar))
+		{
+			++count;
+		}
+		if ((field[winPos[i][2]] == pcChar))
+		{
+			++count;
+		}
+
+		if ((count == 2) && (field[winPos[i][0]] != playerChar) && (field[winPos[i][1]] != playerChar) && (field[winPos[i][2]] != playerChar))
+		{
+			if ((field[winPos[i][0]] == pcChar) && (field[winPos[i][1]] == pcChar))
+			{
+				field[winPos[i][2]] = pcChar;
+				gameField();
+				cout << "выйграл компьютер" << endl;
+				system("pause");
+				exit(0); //win PC
+			}
+			else if ((field[winPos[i][1]] == pcChar) && (field[winPos[i][2]] == pcChar))
+			{
+				field[winPos[i][0]] = pcChar;
+				gameField();
+				cout << "выйграл компьютер" << endl;
+				system("pause");
+				exit(0); //win PC
+			}
+			else if ((field[winPos[i][0]] == pcChar) && (field[winPos[i][2]] == pcChar))
+			{
+				field[winPos[i][1]] = pcChar;
+				gameField();
+				cout << "выйграл компьютер" << endl;
+				system("pause");
+				exit(0); //win PC
+			}
+		}
+	}
+
+	if (i != 10)
+	{
+		i = 0;
+	}
+
+	for (; i < 8; ++i)
+	{
+		count = 0;
+
+		if ((field[winPos[i][0]] == playerChar))
+		{
+			++count;
+		}
+		if ((field[winPos[i][1]] == playerChar))
+		{
+			++count;
+		}
+		if ((field[winPos[i][2]] == playerChar))
+		{
+			++count;
+		}
+
+		if ((count == 2) && (field[winPos[i][0]] != pcChar) && (field[winPos[i][1]] != pcChar) && (field[winPos[i][2]] != pcChar))
+		{
+			if ((field[winPos[i][0]] == playerChar) && (field[winPos[i][1]] == playerChar))
+			{
+				field[winPos[i][2]] = pcChar;
+				cout << "компьютер поставил знак на клетку номер: " << winPos[i][2] + 1 << "\n\n";
+				i = 10;
+				break;
+			}
+			else if ((field[winPos[i][1]] == playerChar) && (field[winPos[i][2]] == playerChar))
+			{
+				field[winPos[i][0]] = pcChar;
+				cout << "компьютер поставил знак на клетку номер: " << winPos[i][0] + 1 << "\n\n";
+				i = 10;
+				break;
+			}
+			else if ((field[winPos[i][0]] == playerChar) && (field[winPos[i][2]] == playerChar))
+			{
+				field[winPos[i][1]] = pcChar;
+				cout << "компьютер поставил знак на клетку номер: " << winPos[i][1] + 1 << "\n\n";
+				i = 10;
+				break;
+			}
+		}
+	}
+
+	if (i != 10)
+	{
+		i = 0;
+	}
+
 	for (; i < 9; ++i)
 	{
 		if ((field[PCmove[i]] != playerChar) && (field[PCmove[i]] != pcChar))
 		{
 			field[PCmove[i]] = pcChar;
+			cout << "компьютер поставил знак на клетку номер: " << PCmove[i] + 1 << "\n\n";
 			break;
 		}
 	}
-
-	cout << "��������� �������� ���� �� ������ �����: " << PCmove[i] + 1 << "\n\n";
 
 	moveNow = true;
 }
 
 void game::victoryDraw()
 {
-	int winPos[8][3] = { {6,7,8}, { 3, 4, 5 }, { 0,1,2 }, { 6,3,0 }, { 7,4,1 }, { 8,5,2 }, { 6,4,2 }, { 0,4,8 } };
-
 	int i = 0;
 
 	for (; i < 8; ++i)
@@ -91,13 +189,13 @@ void game::victoryDraw()
 		if ((field[winPos[i][0]] == playerChar) && (field[winPos[i][1]] == playerChar) && (field[winPos[i][2]] == playerChar))
 		{
 			gameField();
-			cout << "�� ��������" << endl;
+			cout << "вы выйграли" << endl;
 			system("pause");
 			exit(1); //win player
 		}
 		else if ((field[winPos[i][0]] == pcChar) && (field[winPos[i][1]] == pcChar) && (field[winPos[i][2]] == pcChar))
 		{
-			cout << "������� ���������" << endl;
+			cout << "выйграл компьютер" << endl;
 			system("pause");
 			exit(0); //win PC
 		}
@@ -110,7 +208,7 @@ void game::victoryDraw()
 			return; //continue game
 		}
 	}
-	cout << "�����" << endl;
+	cout << "ничья" << endl;
 	system("pause");
 	exit(2); //Draw
 }
